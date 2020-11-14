@@ -190,12 +190,22 @@ function validateInput(inputArgs) {
 
 
 
-var authenticate = {
+var User = {
     flag: false,
-    Email: $('#Email'),
-    Password: $('#Password'),
+    email: {
+        signUpEmail: $('#sign-up-email'),
+        loginEmail: $('#login-email'),
+    },
+    password: {
+        signUpPassword: $('#sign-up-password'),
+        loginPassword: $('#login-password'),
+        resetPassword: $('#reset-password')
+    },
     returnType: 'JSON',
-    requestType: ['POST', 'GET'],
+    requestType: {
+        GET: 'GET',
+        POST: 'POST'
+    },
     Question: $('#SecurityQuestion'),
     Answer: $('#Answer'),
     ChangePassword: $('#small-dialog3'), //Change Password markup
