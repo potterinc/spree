@@ -176,7 +176,6 @@ $('#SignUp').click(function () {
 * } inputArgs 
  */
 
-var
 function validateInput(inputArgs) {
     let validInput = $('[' + inputArgs + ']');
     for (let formInput = 0; formInput < validInput.length; formInput++) {
