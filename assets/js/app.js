@@ -144,16 +144,16 @@ $('#SignUp').click(function () {
                 },
                 success: function (asyncRequest) {
                     authenticate.fullName.val(null);
-                        authenticate.Email.val(null);
-                        authenticate.telephone.val(null);
-                        authenticate.Question.val(null);
-                        authenticate.Answer.val(null);
-                        authenticate.Password.val(null);
-                        $('#SignUpNotification').html(asyncRequest);
-                        setTimeout(function(){
-                            $('#SignUpNotification').fadeOut(1000);
-                            $('#SignUpNotificatioin').val(null).show();
-                        }, 5000)
+                    authenticate.Email.val(null);
+                    authenticate.telephone.val(null);
+                    authenticate.Question.val(null);
+                    authenticate.Answer.val(null);
+                    authenticate.Password.val(null);
+                    $('#SignUpNotification').html(asyncRequest);
+                    setTimeout(function () {
+                        $('#SignUpNotification').fadeOut(1000);
+                        $('#SignUpNotificatioin').val(null).show();
+                    }, 5000)
                 }
             })
         }, 3000)
@@ -176,7 +176,7 @@ $('#SignUp').click(function () {
 * } inputArgs 
  */
 
- var 
+var
 function validateInput(inputArgs) {
     let validInput = $('[' + inputArgs + ']');
     for (let formInput = 0; formInput < validInput.length; formInput++) {
@@ -188,8 +188,6 @@ function validateInput(inputArgs) {
     authenticate.flag = true;
 }
 
-
-
 var User = {
     flag: false,
     email: {
@@ -197,23 +195,27 @@ var User = {
         loginEmail: $('#login-email'),
     },
     password: {
+        passwordResetSection: '',
         signUpPassword: $('#sign-up-password'),
         loginPassword: $('#login-password'),
-        resetPassword: $('#reset-password')
+        resetPassword: $('#reset-password'),
+        signUpConfirmPassword: $('#sign-up-confirm-password'),
+        resetConfirmPassword: $('#reset-confirm-password')
     },
-    returnType: 'JSON',
-    requestType: {
+    dataType: 'JSON',
+    XHRType: {
         GET: 'GET',
         POST: 'POST'
     },
-    Question: $('#SecurityQuestion'),
-    Answer: $('#Answer'),
-    ChangePassword: $('#small-dialog3'), //Change Password markup
-    verifiedUserId: $('#VerifiedUserId'),
-    confirmNewPassword: $('#ConfirmNewPassword'),
-    fullName: $('#FullName'),
-    telephone: $('#Telephone'),
-    getToday: function () {
+    Question: {
+        resetQuestion: $('#login-security'),
+        signUpQuestion: $('#sign-up-question'),
+    },
+    Answer: {
+        signUpAnswer: $('#sign-up-answer'),
+        resetAnswer: $('#sign-up-answer')
+    },
+    getToday: () => {
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"];
         let dateObj = new Date();
