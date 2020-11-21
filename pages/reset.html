@@ -1,39 +1,45 @@
-<div class="overlay-login text-left" id="signup">
+<div class="overlay-login text-left">
     <button type="button" class="overlay-close1">
         <i class="fa fa-times" aria-hidden="true"></i>
     </button>
     <div class="wrap">
-        <h5 class="text-center mb-4">Sign Up</h5>
+        <h5 class="text-center mb-4">Password Reset</h5>
+        <div id="notification"></div>
         <div class="login-bghny p-md-5 p-4 mx-auto mw-100">
-            <!--/Sign up-form-->
+            <!--/login-form-->
             <form action="#" method="post">
                 <div class="form-group">
                     <p class="login-texthny mb-2">Email address</p>
-                    <input type="email" class="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" placeholder="" required="">
+                    <input type="email" class="form-control" id="reset-email" aria-describedby="emailHelp"
+                        placeholder="" signUpAuth>
                     <small id="emailHelp" class="form-text text-muted">We'll never share your
-                        email
-                        with anyone else.</small>
+                        email with anyone else.</small>
                 </div>
                 <div class="form-group">
-                    <p class="login-texthny mb-2">Password</p>
-                    <input type="password" class="form-control" id="exampleInputPassword1"
-                        placeholder="" required="">
+                    <p class="login-texthny mb-2">Security Question</p>
+                    <select name="" id="reset-question" class="form-control">
+                        <option value="null" disabled selected>Please Select...</option>
+                        <option value="">In which city were you born?</option>
+                        <option value="">In which state were you born?</option>
+                        <option value="">In which province were you born?</option>
+                        <option value="">What is the name of your favourite cousin?</option>
+                        <option value="">What is the name of the street where you grew up?
+                        </option>
+                        <option value="">Who is your childhood hero</option>
+                        <option value="">In what town or city was your first full time job?
+                        </option>
+                        <option value="">What is the middle name of your oldest child?</option>
+                        <option value="">What primary school did you attend?</option>
+                    </select>
                 </div>
-                <div class="form-check mb-2">
-                    <div class="userhny-check">
-                        <label class="check-remember container">
-                            <input type="checkbox" class="form-check"> <span
-                                class="checkmark"></span>
-                            <p class="privacy-policy">Remember me</p>
-                        </label>
-                        <div class="clearfix"></div>
-                    </div>
+                <div class="form-group">
+                    <p class="login-texthny mb-2">Security Answer</p>
+                    <input type="text" class="form-control" id="reset-answer" aria-describedby="emailHelp"
+                        placeholder="" signUpAuth>
                 </div>
-                <button type="submit" class="submit-login btn mb-4">Sign In</button>
-
+                <button type="button" class="submit-login btn mb-4">Verify</button>
             </form>
-            <!--//Sign up -form-->
+            <!--//login-form-->
         </div>
         <!---->
     </div>
