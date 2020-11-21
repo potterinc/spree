@@ -4,33 +4,34 @@
     </button>
     <div class="wrap">
         <h5 class="text-center mb-4">Sign up</h5>
+        <div id="notification"></div>
         <div class="login-bghny p-md-5 p-4 mx-auto mw-100">
             <!--/login-form-->
             <form action="#" method="post">
                 <div class="form-group">
                     <p class="login-texthny mb-2">Full Name</p>
                     <input type="text" class="form-control" id="sign-up-fullname" aria-describedby="emailHelp"
-                        placeholder="" authSignUpFullName>
+                        placeholder="" signUpAuth>
                 </div>
                 <div class="form-group">
                     <p class="login-texthny mb-2">Email address</p>
                     <input type="email" class="form-control" id="sign-up-email" aria-describedby="emailHelp"
-                        placeholder="" authSignUpEmail>
+                        placeholder="" signUpAuth>
                     <small id="emailHelp" class="form-text text-muted">We'll never share your
                         email with anyone else.</small>
                 </div>
                 <div class="form-group">
                     <p class="login-texthny mb-2">Telephone</p>
                     <input type="tel" class="form-control" id="sign-up-telephone" aria-describedby="emailHelp"
-                        placeholder="" authSignUpTelephone />
+                        placeholder="" signUpAuth />
                 </div>
                 <div class="form-group">
                     <p class="login-texthny mb-2">Country</p>
-                    <select class="form-control" id="Country">
+                    <select class="form-control" id="country">
                         <option value="null">[Select Country]</option>
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Aland Islands">Aland Islands</option>
-                        <option value="Albania">Albania</option>
+                        <option value="Albania">Alba            nia</option>
                         <option value="Algeria">Algeria</option>
                         <option value="American Samoa">American Samoa</option>
                         <option value="Andorra">Andorra</option>
@@ -322,15 +323,15 @@
                 <div class="form-group">
                     <p class="login-texthny mb-2">Security Answer</p>
                     <input type="text" class="form-control" id="sign-up-answer" aria-describedby="emailHelp"
-                        placeholder="" authSignUpAnswer>
+                        placeholder="" signUpAuth>
                 </div>
                 <div class="form-group">
                     <p class="login-texthny mb-2">Password</p>
-                    <input type="password" class="form-control" id="sign-up-password" placeholder="" authSingUpPassword />
+                    <input type="password" class="form-control" id="sign-up-password" placeholder="" signUpAuth />
                 </div>
                 <div class="form-group">
                     <p class="login-texthny mb-2">Confirm Password</p>
-                    <input type="password" class="form-control" id="sign-up-confirm-password" placeholder="" authSingUpPassword />
+                    <input type="password" class="form-control" id="sign-up-confirm-password" placeholder="" SignUpAuth />
                 </div>
 
                 <div class="form-check mb-2">
@@ -342,7 +343,7 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <button type="submit" class="submit-login btn mb-4">Sign In</button>
+                <button type="button" class="submit-login btn mb-4">Sign In</button>
             </form>
             <!--//login-form-->
         </div>

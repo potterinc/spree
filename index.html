@@ -66,7 +66,7 @@ Author URL: http://potterincorporated.com
 										<div class="form-group">
 											<p class="login-texthny mb-2">Email address</p>
 											<input type="email" class="form-control" id="login-email"
-												aria-describedby="emailHelp" placeholder="" authLoginEmail />
+												aria-describedby="emailHelp" placeholder="mail@example.com" loginAuth />
 											<small id="emailHelp" class="form-text text-muted">We'll never share your
 												email
 												with anyone else.</small>
@@ -74,19 +74,18 @@ Author URL: http://potterincorporated.com
 										<div class="form-group">
 											<p class="login-texthny mb-2">Password</p>
 											<input type="password" class="form-control" id="login-password"
-												placeholder="" authLoginPassword />
+												placeholder="*******" loginAuth />
 										</div>
 										<div class="form-check mb-2">
 											<div class="userhny-check">
 												<label class="check-remember container">
-													<input type="checkbox" class="form-check"> <span
-														class="checkmark"></span>
+													<input type="checkbox" class="form-check"> <span class="checkmark"></span>
 													<p class="privacy-policy">Remember me</p>
 												</label>
 												<div class="clearfix"></div>
 											</div>
 										</div>
-										<button type="button" class="submit-login btn mb-4">Sign In</button>
+										<button type="button" id="sign-in-button" class="submit-login btn mb-4">Sign In</button>
 
 									</form>
 									<!--//login-form-->
@@ -1158,6 +1157,8 @@ Author URL: http://potterincorporated.com
 <!-- disable body scroll which navbar is in active -->
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.copyrights.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/request/authenticate.js"></script>
 <script>
 	$('#year').copyrights();
 	$('#developer').developer();

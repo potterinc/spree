@@ -1,64 +1,29 @@
 
-// Login Asychronous Request
-$('#SignIn').click(function () {
-    validateInput('validateLogin') // Form Validation
-
-    //Sending asynchronous request
-    if (authenticate.flag == true) {
-        $('#SignIn').html('<img src="./images/dual-ring-loader.gif" width="32" />');
-
-        setTimeout(function () {
-            $.ajax({
-                url: '/config/auth.php',
-                type: authenticate.requestType[0],
-                dataType: authenticate.dataType,
-                data: {
-                    email: authenticate.Email.val(),
-                    password: authenticate.Password.val(),
-                },
-                success: function (asyncRequest) {
-                    authenticate.Email.val(null);
-                    authenticate.Password.val(null);
-                    $('#loginStatus').html(asyncRequest);
-
-                    setTimeout(function () {
-                        $('#loginStatus').fadeOut(1000);
-                    }, 5000);
-
-                    $('#loginStatus').val(null).show();
-                }
-            })
-        }, 3000);
-    }
-});
-
-
-
 // Password Verification Asychronous Request 
 $('#VerifyAccount').click(function () {
     validateInput('validateAccount');
 
     //Sending asynchronous request
-    if (authenticate.flag == true) {
+    if (User.flag == true) {
         $('#VerifyAccount').html('<img src="./images/dual-ring-loader.gif" width="32" />');
         setTimeout(function () {
             $.ajax({
                 url: '../config/auth.php',
-                dataType: authenticate.returnType,
-                type: authenticate.requestType[0],
+                dataType: User.returnType,
+                type: User.requestType[0],
                 data: {
-                    email: authenticate.Email.val(),
-                    answer: authenticate.Answer.val(),
-                    securityQuestion: authenticate.Question.val()
+                    email: User.Email.val(),
+                    answer: User.Answer.val(),
+                    securityQuestion: User.Question.val()
                 },
                 success: function (asyncRequest) {
-                    authenticate.Email.val(null);
-                    authenticate.Answer.val(null);
-                    authenticate.securityQuestion.val(null);
+                    User.Email.val(null);
+                    User.Answer.val(null);
+                    User.securityQuestion.val(null);
 
                     if (asyncRequest.status == true) {
-                        $('#small-dialog2').html(authenticate.ChangePassword.html());
-                        authenticate.verifiedUserId.val(authResponse.userId);
+                        $('#small-dialog2').html(User.ChangePassword.html());
+                        User.verifiedUserId.val(authResponse.userId);
                     }
                     else {
 
@@ -80,23 +45,23 @@ $('#ResetPassword').click(function () {
     validateInput('validatePassword');
 
     //Sending asynchronous request
-    if (authenticate.flag == true) {
+    if (User.flag == true) {
         $('#ResetPassword').html('<img src="./images/dual-ring-loader.gif" width="32" />');
 
-        if (authenticate.confirmNewPassword.val() == authenticate.Password.val()) {
+        if (User.confirmNewPassword.val() == User.Password.val()) {
 
             setTimeout(function () {
                 $.ajax({
                     url: '../config/auth.php',
-                    dataType: authenticate.returnType,
-                    type: authenticate.requestType[0],
+                    dataType: User.returnType,
+                    type: User.requestType[0],
                     data: {
-                        password: authenticate.Password.val(),
-                        userId: authenticate.verifiedUserId.val()
+                        password: User.Password.val(),
+                        userId: User.verifiedUserId.val()
                     },
                     success: function (asyncRequest) {
-                        authenticate.Password.val(null);
-                        authenticate.confirmNewPassword.val(null);
+                        User.Password.val(null);
+                        User.confirmNewPassword.val(null);
 
                         if (asyncRequest.Status == true) {
                             $('#PasswordResetStatus').html(asyncRequest.Message);
@@ -121,74 +86,100 @@ $('#ResetPassword').click(function () {
 
 });
 
-// New User Registration
-$('#SignUp').click(function () {
-    validateInput('validateUser');
-    //Sending asynchronous request
-    if (authenticate.flag == true) {
-        $('#SignUp').html('<img src="./images/dual-ring-loader.gif" width="32" />');
+var Auth = {
 
-        setTimeout(function () {
+    // Form Validation
+    formValidate: (inputArgs) => {
+        let validInput = $('[' + inputArgs + ']');
+        for (let formInput = 0; formInput < validInput.length; formInput++) {
+            if (validInput.get(formInput).value == null || validInput.get(formInput).value == '') {
+                validInput[formInput].placeholder = 'This field is required';
+                return false;
+            }
+        }
+        User.flag = true;
+    },
+
+    // Login Algorithm
+    login: () => {
+        $('#sign-in-button').html('Signing in...');
+
+        setTimeout(() => {
             $.ajax({
                 url: '../config/auth.php',
-                type: authenticate.requestType[0],
-                dataType: authenticate.returnType,
+                type: User.XHR.POST,
+                dataType: User.JSONtype,
+                beforeSend: ()=>{$(this).html('Please wait...')},
                 data: {
-                    fullName: authenticate.fullName.val(),
-                    email: authenticate.Email.val(),
-                    telephone: authenticate.telephone.val(),
-                    securityQuestion: authenticate.Question.val(),
-                    answer: authenticate.Answer.val(),
-                    password: authenticate.Password.val(),
-                    dateOfRegistration: authenticate.getToday()
+                    email: User.email.loginEmail.val(),
+                    password: User.password.loginPassword.val(),
                 },
                 success: function (asyncRequest) {
-                    authenticate.fullName.val(null);
-                    authenticate.Email.val(null);
-                    authenticate.telephone.val(null);
-                    authenticate.Question.val(null);
-                    authenticate.Answer.val(null);
-                    authenticate.Password.val(null);
-                    $('#SignUpNotification').html(asyncRequest);
-                    setTimeout(function () {
-                        $('#SignUpNotification').fadeOut(1000);
-                        $('#SignUpNotificatioin').val(null).show();
-                    }, 5000)
+                    User.email.loginEmail.val(null);
+                    User.password.loginPassword.val(null);
+                    $('#login-status').html(asyncRequest);
+
+                    setTimeout(() => {
+                        $('#loginStatus').fadeOut(1000);
+                    }, 5000);
+
+                    $('#loginStatus').val(null).show();
                 }
             })
+        }, 3000);
+    },
+
+    // Sign Up
+    signUp: () => {
+
+        setTimeout(() => {
+            if (User.password.signUpConfirmPassword === User.password.signUpPassword) {
+
+                $.ajax({
+                    url: '../config/auth.php',
+                    type: User.XHR.POST,
+                    dataType: User.JSONtype,
+                    beforeSend: ()=>{$(this).html('Please wait...')},
+                    data: {
+                        fullName: User.fullName.val(),
+                        email: User.email.signUpEmail.val(),
+                        telephone: User.telephone.val(),
+                        securityQuestion: User.question.signUpQuestion.val(),
+                        answer: User.answer.signUpAnswer.val(),
+                        password: User.password.signUpPassword.val(),
+                        dateOfRegistration: User.getToday()
+                    },
+                    success: (asyncRequest) => {
+                        User.fullName.val(null);
+                        User.email.signUpEmail.val(null);
+                        User.telephone.val(null);
+                        User.question.signUpQuestion.val(null);
+                        User.answer.signUpAnswer.val(null);
+                        User.password.signUpPassword.val(null);
+                        $('#SignUpNotification').html(asyncRequest);
+                        setTimeout(() => {
+                            $('#notification').fadeOut(1000);
+                            $('#notification').val(null).show();
+                        }, 5000)
+                    }
+                })
+            }
+            else
+                setTimeout(() => {
+                    $('#notification').html('Password Does not match: Try again')
+                    $('#notification').fadeOut(1000)
+                    $('#notification').val(null).show();
+                    return false;
+                }, 5000)
         }, 3000)
     }
-})
-
-/**
- * 
- * @param { This function validates form controls when called.
-  Each group of controls should have a unique username.
-  * 
-  EXAMPLE:
-  *
-  <input type='text' name="Username" required="true" validate />
-* 
-* <script>
-* 
-*  validateInput('validate);
-* </script>
-* } inputArgs 
- */
-
-function validateInput(inputArgs) {
-    let validInput = $('[' + inputArgs + ']');
-    for (let formInput = 0; formInput < validInput.length; formInput++) {
-        if (validInput.get(formInput).value == null || validInput.get(formInput).value == '') {
-            validInput[formInput].placeholder = 'This field is required';
-            return false;
-        }
-    }
-    authenticate.flag = true;
 }
+
+
 
 var User = {
     flag: false,
+    fullName: $('#sign-up-fullname'),
     email: {
         signUpEmail: $('#sign-up-email'),
         loginEmail: $('#login-email'),
@@ -201,16 +192,18 @@ var User = {
         signUpConfirmPassword: $('#sign-up-confirm-password'),
         resetConfirmPassword: $('#reset-confirm-password')
     },
-    dataType: 'JSON',
-    XHRType: {
+    telephone: $('#sign-up-telephone'),
+    country: $('#country'),
+    JSONtype: 'JSON',
+    XHR: {
         GET: 'GET',
         POST: 'POST'
     },
-    Question: {
+    question: {
         resetQuestion: $('#login-security'),
         signUpQuestion: $('#sign-up-question'),
     },
-    Answer: {
+    answer: {
         signUpAnswer: $('#sign-up-answer'),
         resetAnswer: $('#sign-up-answer')
     },
