@@ -149,7 +149,6 @@ var Auth = {
                     User.verifiedUserId.val(authResponse.userId);
                 }
                 else {
-
                     $('#AccountVerificationStatus').html(authResponse.error);
                     setTimeout(function () {
                         $('#AccountVerificationStatus').fadeOut(1000);
