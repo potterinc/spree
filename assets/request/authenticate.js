@@ -25,10 +25,10 @@ $('#sign-up-button').click(() => {
  */
 
 //  Sign Up Link
-$('#sign-up').click(() => { $('#page-session').load('../pages/signup.html'); })
+$('#sign-up').click(() => { $('#page-session').load('pages/signup.html'); })
 
 // Password Rest Link
-$('#password-reset').click(() => { $('#page-session').load('../pages/reset.html'); })
+$('#password-reset').click(() => { $('#page-session').load('pages/reset.html'); })
 
 // Login Link
-$('#login-link').click(() => { $('#page-session').load('../pages/reset.html'); })
+$('#login-link').click(() => { $('#page-session').load('pages/login.html'); })
